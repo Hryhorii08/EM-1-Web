@@ -94,8 +94,8 @@ def delete_first_row(service):
                     'range': {
                         'sheetId': SHEET_ID,
                         'dimension': 'ROWS',
-                        'startIndex': 0,   # удаляем A1
-                        'endIndex': 1
+                        'startIndex': 1,   # удаляем A1
+                        'endIndex': 2
                     }
                 }
             }]
@@ -109,7 +109,7 @@ def process_once_and_report(chat_id: int):
     sheet = service.spreadsheets()
 
     # Читаем A1:D1 (как ты просил)
-    rng = f"{SHEET_NAME}!A1:D1"
+    rng = f"{SHEET_NAME}!A2:D2"
     res = sheet.values().get(spreadsheetId=SPREADSHEET_ID, range=rng).execute()
     values = res.get('values', [])
 
@@ -191,3 +191,4 @@ def webhook():
 if __name__ == "__main__":
     port = int(os.getenv("PORT", "10000"))
     app.run(host="0.0.0.0", port=port)
+
